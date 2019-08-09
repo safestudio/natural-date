@@ -1,7 +1,7 @@
 import NaturalDate from "../lib/NaturalDate";
 
 test("Construct simple date", () => {
-  let date = new NaturalDate(2019, 1, 1);
+  const date = new NaturalDate(2019, 1, 1);
 
   expect(date).toBeInstanceOf(Date);
   expect(date.getFullYear()).toBe(2019);
@@ -10,7 +10,7 @@ test("Construct simple date", () => {
 });
 
 test("Construct simple date in a leap year", () => {
-  let date = new NaturalDate(2000, 2, 29);
+  const date = new NaturalDate(2000, 2, 29);
 
   expect(date).toBeInstanceOf(Date);
   expect(date.getFullYear()).toBe(2000);
@@ -72,4 +72,23 @@ test("Construct simple date with invalid second", () => {
   expect(() => new NaturalDate(2019, 1, 1, 0, 0, -1)).toThrow(
     "Only accept second from 0 to 59"
   );
+});
+
+test("Test equal date", () => {
+  let date1 = new Date(2019, 1, 1);
+  let date2 = new NaturalDate(2019, 2, 1);
+
+  expect(date2).toEqual(date1);
+});
+
+test("Test equal date in array", () => {
+  const array = [
+    new Date(2019, 0, 1),
+    new Date(2019, 1, 1),
+    new Date(2019, 2, 1),
+    new Date(2019, 3, 1)
+  ];
+  const date = new NaturalDate(2019, 2, 1);
+
+  expect(array).toContainEqual(date);
 });
