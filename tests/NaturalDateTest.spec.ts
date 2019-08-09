@@ -1,4 +1,4 @@
-import NaturalDate from "../src/NaturalDate";
+import NaturalDate from "../lib/NaturalDate";
 
 test("Construct simple date", () => {
   let date = new NaturalDate(2019, 1, 1);
