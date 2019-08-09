@@ -1,6 +1,6 @@
 {
   "name": "@safestudio/natural-date",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Natural Date for Javascript",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
