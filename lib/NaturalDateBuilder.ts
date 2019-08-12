@@ -10,7 +10,8 @@ class NaturalDateBuilder {
   private _seconds: number;
   private _milliseconds: number;
 
-  private constructor() {}
+  private constructor() {
+  }
 
   static new() {
     return new NaturalDateBuilder();
@@ -93,8 +94,8 @@ class NaturalDateBuilder {
       throw new Error("Only accept second from 0 to 59");
     }
 
-    if (this._seconds < 0) {
-      throw new Error("Only accept positive millisecond");
+    if (this._milliseconds < 0 || this._milliseconds > 999) {
+      throw new Error("Only accept millisecond from 0 to 999");
     }
 
     return true;

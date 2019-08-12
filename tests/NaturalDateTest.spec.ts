@@ -1,3 +1,4 @@
+import "jest-extended";
 import NaturalDate from "../lib/NaturalDate";
 
 test("Construct simple date", () => {
@@ -74,14 +75,31 @@ test("Construct simple date with invalid second", () => {
   );
 });
 
+test("Construct simple date with invalid millisecond", () => {
+  expect(() => new NaturalDate(2019, 1, 1, 0, 0, 0, 1000)).toThrow(
+    "Only accept millisecond from 0 to 999"
+  );
+
+  expect(() => new NaturalDate(2019, 1, 1, 0, 0, 0, -1)).toThrow(
+    "Only accept millisecond from 0 to 999"
+  );
+});
+
 test("Test equal date", () => {
-  let date1 = new Date(2019, 1, 1);
-  let date2 = new NaturalDate(2019, 2, 1);
+  let date1 = new Date(2019, 0, 1);
+  let date2 = new NaturalDate(2019, 1, 1);
 
   expect(date2).toEqual(date1);
 });
 
-test("Test equal date in array", () => {
+test("Test function fromDate", () => {
+  let date = new Date(2019, 0, 1);
+  let naturalDate = NaturalDate.fromDate(date);
+
+  expect(date.getTime()).toEqual(naturalDate.getTime());
+});
+
+test("Test date included in array", () => {
   const array = [
     new Date(2019, 0, 1),
     new Date(2019, 1, 1),
@@ -91,4 +109,22 @@ test("Test equal date in array", () => {
   const date = new NaturalDate(2019, 2, 1);
 
   expect(array).toContainEqual(date);
+});
+
+test("Test equal date arrays", () => {
+  const array1 = [
+    new Date(2019, 0, 1),
+    new Date(2019, 1, 1),
+    new Date(2019, 2, 1),
+    new Date(2019, 3, 1)
+  ];
+
+  const array2 = [
+    new Date(2019, 2, 1),
+    new Date(2019, 3, 1),
+    new Date(2019, 0, 1),
+    new Date(2019, 1, 1)
+  ];
+
+  expect(array1).toIncludeSameMembers(array2);
 });
